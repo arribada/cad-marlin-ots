@@ -1,0 +1,27 @@
+# Git LFS tracking for large CAD files
+# See https://git-lfs.github.com/
+
+# STEP files (CAD exchange format) - typically large
+*.step filter=lfs diff=lfs merge=lfs -text
+*.STEP filter=lfs diff=lfs merge=lfs -text
+*.stp filter=lfs diff=lfs merge=lfs -text
+*.STP filter=lfs diff=lfs merge=lfs -text
+
+# FreeCAD native files - can be large with complex models
+*.FCStd filter=lfs diff=lfs merge=lfs -text
+*.fcstd filter=lfs diff=lfs merge=lfs -text
+.FCBak* filter=lfs diff=lfs merge=lfs -text
+.FCBak* filter=lfs diff=lfs merge=lfs -text
+
+.obj* filter=lfs diff=lfs merge=lfs -text
+.mtl* filter=lfs diff=lfs merge=lfs -text
+.jpeg* filter=lfs diff=lfs merge=lfs -text
+.jpg* filter=lfs diff=lfs merge=lfs -text
+.png* filter=lfs diff=lfs merge=lfs -text
+.bmp* filter=lfs diff=lfs merge=lfs -text
+.tiff* filter=lfs diff=lfs merge=lfs -text
+.pdf* filter=lfs diff=lfs merge=lfs -text
+.mp4* filter=lfs diff=lfs merge=lfs -text
+.mpeg* filter=lfs diff=lfs merge=lfs -text
+.mp3* filter=lfs diff=lfs merge=lfs -text
+
