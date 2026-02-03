@@ -78,7 +78,7 @@ jobs:
 
           echo "files=$FILES" >> $GITHUB_OUTPUT
           echo "Found CAD files to export: $FILES"
-
+          
           if [ -z "$FILES" ]; then
             echo "No .FCStd files to process"
             echo "has_files=false" >> $GITHUB_OUTPUT
