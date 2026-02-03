@@ -73,18 +73,21 @@ jobs:
 
           echo "Logging Details for Debugging..."
           echo "event name is:" ${{ github.event_name }} 
+          echo "export all state is:" ${{ inputs.export_all }}
+
 
       - name: Identify changed CAD files
         id: changed-files
         run: |
         
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.export_all }}" == "true" ]]; then
+            echo "state 1"
             FILES=$(find . -path "*/CAD_INTERNAL/FREECAD_FILES/*.FCStd" -type f | tr '\n' ' ')
           else
+            echo "state 2"
             FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- '**/CAD_INTERNAL/FREECAD_FILES/**/*.FCStd' | tr '\n' ' ')
           fi
 
-          echo "EventName=${{ github.event_name }}" >> $GITHUB_OUTPUT
           echo "files=$FILES" >> $GITHUB_OUTPUT
           echo "Found CAD files to export: $FILES"
 
