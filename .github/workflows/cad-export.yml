@@ -73,6 +73,7 @@ jobs:
 
           echo "Logging Details for Debugging..."
           echo "event name is:" ${{ github.event_name }} 
+          echo "origin branch is:" ${{ github.base_ref }}
           echo "export all state is:" ${{ inputs.export_all }}
 
 
