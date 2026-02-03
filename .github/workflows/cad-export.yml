@@ -67,13 +67,6 @@ jobs:
           echo "FreeCAD version:"
           freecad --version || freecadcmd --version || echo "Version check not available"
 
-      - name: Log Details
-        id: log-details
-        run: | 
-
-          echo "Logging Details for Debugging..."
-          echo "event name is:" ${{ github.event_name }} 
-
       - name: Identify changed CAD files
         id: changed-files
         run: |
