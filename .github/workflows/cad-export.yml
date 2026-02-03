@@ -75,8 +75,10 @@ jobs:
           else
             FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- '**/CAD_INTERNAL/FREECAD_FILES/**/*.FCStd' | tr '\n' ' ')
           fi
+
           echo "files=$FILES" >> $GITHUB_OUTPUT
           echo "Found CAD files to export: $FILES"
+          
           if [ -z "$FILES" ]; then
             echo "No .FCStd files to process"
             echo "has_files=false" >> $GITHUB_OUTPUT
