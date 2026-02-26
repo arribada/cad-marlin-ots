@@ -90,7 +90,7 @@ def export_to_step(input_path):
     try:
         # Create new array of objects for export, and add Assembly to it
         export_objects = []
-        export_objects.append(export_object)
+        export_objects.append(assembly_to_export)
         ImportGui.export(export_objects, output_path, options)
         
         # Verify export
