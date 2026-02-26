@@ -27,49 +27,18 @@ except ImportError as e:
     sys.exit(1)
 
 
-def get_all_shapes(doc):
-    """Find all exportable shapes in the document."""
-    shapes = []
+def get_assembly(doc):
+
+    export_object = None
+    # Find the first Assembly object in the FreeCAD file
+    for obj in FreeCAD.ActiveDocument.Objects:
+        if (obj.Module == "Assembly"):
+            export_object = obj
+            print ("Object: ", obj, obj.TypeId)
+            break;
     
-    # Types to skip (helper objects, not geometry)
-    skip_types = [
-        'Sketcher::SketchObject', 
-        'PartDesign::Plane', 
-        'PartDesign::Line', 
-        'PartDesign::Point',
-        'App::Origin', 
-        'App::Plane', 
-        'App::Line'
-    ]
-    
-    for obj in doc.Objects:
-        # Skip if object has no Shape attribute
-        if not hasattr(obj, 'Shape'):
-            continue
-        
-        # Skip if shape is null
-        try:
-            if obj.Shape.isNull():
-                continue
-        except Exception:
-            continue
-        
-        # Check for solids
-        try:
-            if len(obj.Shape.Solids) == 0:
-                continue
-        except Exception:
-            continue
-        
-        # Skip helper objects
-        if obj.TypeId in skip_types:
-            continue
-        
-        # This object is exportable
-        print(f"  Found: {obj.Name} ({obj.TypeId}) - {len(obj.Shape.Solids)} solid(s)")
-        shapes.append(obj)
-    
-    return shapes
+    # Return detected assembly
+    return export_object
 
 
 def export_to_step(input_path):
@@ -107,20 +76,23 @@ def export_to_step(input_path):
         print(f"ERROR: Could not open document: {e}")
         return None
     
-    # Find all exportable shapes
-    print("Scanning for exportable bodies...")
-    shapes = get_all_shapes(doc)
+    # Find exportable Assembly object
+    print("Scanning for exportable assembly...")
+    assembly_to_export = get_assembly(doc)
     
-    if not shapes:
-        print("WARNING: No exportable solid bodies found in document")
+    if not assembly_to_export:
+        print("WARNING: No exportable Assembly found in document")
         FreeCAD.closeDocument(doc.Name)
         return None
     
-    print(f"Exporting {len(shapes)} object(s)...")
+    print(f"Exporting Assembly object...")
     
     # Export to STEP
     try:
-        Import.export(shapes, output_path)
+        # Create new array of objects for export, and add Assembly to it
+        export_objects = []
+        export_objects.append(assembly_to_export)
+        ImportGui.export(export_objects, output_path, options)
         
         # Verify export
         if os.path.exists(output_path):
