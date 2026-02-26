@@ -43,6 +43,10 @@ jobs:
       contents: write
       pull-requests: write
 
+    # Removing old installation code as installing a version from 2024...
+    # sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
+    # sudo apt-get update
+    # sudo apt-get install -y freecad
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -59,11 +63,10 @@ jobs:
           git lfs track "*.STEP"
           echo "Git LFS configured"
 
+
       - name: Install FreeCAD
         run: |
-          sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
-          sudo apt-get update
-          sudo apt-get install -y freecad
+          sudo snap install freecad
           echo "FreeCAD version:"
           freecad --version || freecadcmd --version || echo "Version check not available"
 
