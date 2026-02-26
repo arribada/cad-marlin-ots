@@ -65,7 +65,7 @@ jobs:
 
       - name: Check Python Information
         run: |
-          python –version
+          python3 --version
 
       - name: Install FreeCAD
         run: |
