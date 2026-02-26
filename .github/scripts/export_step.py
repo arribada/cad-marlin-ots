@@ -22,6 +22,8 @@ try:
     import FreeCAD
     import Part
     import Import
+    import ImportGui
+    
 except ImportError as e:
     print(f"ERROR: Could not import FreeCAD modules: {e}")
     sys.exit(1)
@@ -148,9 +150,9 @@ def main():
     results = []
     
     print(f"Processing {len(input_files)} file(s)")
-    
     for input_file in input_files:
         result = export_to_step(input_file)
+    
         results.append((input_file, result))
     
     # Summary
