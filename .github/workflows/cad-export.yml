@@ -73,7 +73,7 @@ jobs:
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.export_all }}" == "true" ]]; then
             FILES=$(find . -path "*/CAD_INTERNAL/FREECAD_FILES/*.FCStd" -type f | tr '\n' ' ')
           else
-            FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'CAD_INTERNAL/FREECAD_FILES/**/*.FCStd' | tr '\n' ' ')
+            FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'CAD_INTERNAL/FREECAD_FILES/Assemblies/**/*.FCStd' | tr '\n' ' ')
           fi
 
           echo "files=$FILES" >> $GITHUB_OUTPUT
