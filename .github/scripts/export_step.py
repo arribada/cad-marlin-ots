@@ -29,6 +29,7 @@ except ImportError as e:
 
 def get_assembly(doc):
 
+    export_object = None
     # Find the first Assembly object in the FreeCAD file
     for obj in FreeCAD.ActiveDocument.Objects:
         if (obj.Module == "Assembly"):
