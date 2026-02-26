@@ -22,7 +22,6 @@ try:
     import FreeCAD
     import Part
     import Import
-    import ImportGui
 except ImportError as e:
     print(f"ERROR: Could not import FreeCAD modules: {e}")
     sys.exit(1)
