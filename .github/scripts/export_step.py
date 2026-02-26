@@ -22,7 +22,7 @@ try:
     import FreeCAD
     import Part
     import Import
-    
+    import ImportGui
     print ("IMPORTING GUI HERE")
     
 except ImportError as e:
