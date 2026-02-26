@@ -48,10 +48,6 @@ jobs:
     # sudo apt-get update
     # sudo apt-get install -y freecad
     steps:
-      - name: Check Python Information
-        run: |
-          python –version
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -67,6 +63,9 @@ jobs:
           git lfs track "*.STEP"
           echo "Git LFS configured"
 
+      - name: Check Python Information
+        run: |
+          python –version
 
       - name: Install FreeCAD
         run: |
